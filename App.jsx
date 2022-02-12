@@ -7,9 +7,11 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Feather } from '@expo/vector-icons';
-import TodoList from './src/TodoList';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import TodoList from './src/projects/TodoList';
+
 import Home from './src/Home';
+import CurrencyConverter from './src/projects/CurrencyConverter';
 
 const Drawer = createDrawerNavigator();
 
@@ -47,6 +49,19 @@ export default function App() {
           }}
           name="TodoList"
           component={TodoList}
+        />
+        <Drawer.Screen
+          options={{
+            title: 'Currency Converter',
+            drawerIcon: ({ color }) => <MaterialCommunityIcons name="currency-usd-circle-outline" size={22} color={color} />,
+            drawerActiveTintColor: '#EAB308',
+            drawerActiveBackgroundColor: '#FEFCE8',
+            headerStyle: {
+              backgroundColor: '#EAB308',
+            },
+          }}
+          name="CurrencyConverter"
+          component={CurrencyConverter}
         />
       </Drawer.Navigator>
       <StatusBar />
