@@ -8,17 +8,29 @@ import {
 import { FAB, Checkbox } from 'react-native-paper';
 import { Feather } from '@expo/vector-icons';
 import Swipeout from 'react-native-swipeout';
+import Animated, { Layout, SlideInLeft, SlideOutRight } from 'react-native-reanimated';
+import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 function TodoList() {
   const [task, setTask] = useState({});
 
   useEffect(() => {
-    console.log(task);
+    AsyncStorageLib.getItem('@mrnga:todo', (err, res) => {
+      if (err) throw err;
+      if (res !== null) {
+        setTask(JSON.parse(res));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    AsyncStorageLib.setItem('@mrnga:todo', JSON.stringify(task));
   }, [task]);
 
   return (
     <View style={{
       flex: 1,
+      backgroundColor: 'white',
     }}
     >
       <ScrollView style={{
@@ -26,69 +38,77 @@ function TodoList() {
       }}
       >
         {Object.keys(task).map((id) => (
-          <Swipeout
-            style={{
-              marginBottom: 8,
-              borderWidth: 1,
-              borderColor: '#E2E8F0',
-              borderRadius: 6,
-            }}
-            backgroundColor="transparent"
-            autoClose
-            right={(() => [
-              {
-                text: (
-                  <Text
-                    numberOfLines={1}
-                    style={{
-                      fontWeight: 'bold',
-                      color: 'white',
-                    }}
-                  >
-                    Delete
-                  </Text>
-                ),
-                backgroundColor: '#F43F5E',
-                onPress: () => {
-                  delete task[id];
-                  setTask({ ...task });
-                },
-              },
-            ])()}
+          <Animated.View
+            key={id}
+            entering={SlideInLeft.duration(300)}
+            exiting={SlideOutRight.duration(300)}
+            layout={Layout}
           >
-            <View
-              key={id}
+            <Swipeout
               style={{
-                padding: 16,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
+                marginBottom: 8,
+                borderWidth: 1,
+                borderColor: '#E2E8F0',
+                borderRadius: 6,
               }}
+              backgroundColor="white"
+              autoClose
+              right={(() => [
+                {
+                  text: (
+                    <Text
+                      numberOfLines={1}
+                      style={{
+                        fontWeight: 'bold',
+                        color: 'white',
+                      }}
+                    >
+                      Delete
+                    </Text>
+                  ),
+                  backgroundColor: '#F43F5E',
+                  onPress: () => {
+                    delete task[id];
+                    setTask({ ...task });
+                  },
+                },
+              ])()}
             >
-              <TextInput
+              <View
+                key={id}
                 style={{
-                  fontSize: 16,
-                  flex: 1,
-                  textDecorationStyle: 'solid',
-                  textDecorationLine: task[id].completed ? 'line-through' : 'none',
+                  padding: 16,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
                 }}
-                value={task[id].name}
-                editable={!task[id].completed}
-                onChangeText={(e) => {
-                  task[id].name = e;
-                  setTask({ ...task });
-                }}
-                placeholder="Type your task here"
-              />
-              <Checkbox
-                status={task[id].completed ? 'checked' : 'unchecked'}
-                onPress={() => {
-                  task[id].completed = !task[id].completed;
-                  setTask({ ...task });
-                }}
-                color="#F43F5E"
-              />
-            </View>
-          </Swipeout>
+              >
+                <TextInput
+                  style={{
+                    fontSize: 16,
+                    flex: 1,
+                    textDecorationStyle: 'solid',
+                    textDecorationLine: task[id].completed ? 'line-through' : 'none',
+                  }}
+                  value={task[id].name}
+                  editable={!task[id].completed}
+                  onChangeText={(e) => {
+                    task[id].name = e;
+                    setTask({ ...task });
+                  }}
+                  placeholder="Type your task here"
+                  selectionColor="#F43F5E"
+                />
+                <Checkbox
+                  status={task[id].completed ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    task[id].completed = !task[id].completed;
+                    setTask({ ...task });
+                  }}
+                  color="#F43F5E"
+                />
+              </View>
+            </Swipeout>
+          </Animated.View>
         ))}
       </ScrollView>
       <FAB

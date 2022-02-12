@@ -2,6 +2,8 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import { MotiView } from 'moti';
+import { Easing } from 'react-native-reanimated';
 
 function Home() {
   return (
@@ -11,7 +13,23 @@ function Home() {
       height: '100%',
     }}
     >
-      <Ionicons name="md-logo-react" size={196} color="#34D399" />
+      <MotiView
+        from={{
+          rotate: '0deg',
+        }}
+        animate={{
+          rotate: '360deg',
+        }}
+        transition={{
+          loop: true,
+          repeatReverse: false,
+          type: 'timing',
+          duration: 3000,
+          easing: Easing.linear,
+        }}
+      >
+        <Ionicons name="md-logo-react" size={196} color="#34D399" />
+      </MotiView>
       <Text style={{
         fontSize: 32,
         fontWeight: 'bold',
