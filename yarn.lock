@@ -4720,6 +4720,11 @@ mockdate@^3.0.2:
   resolved "https://registry.npmjs.org/mockdate/-/mockdate-3.0.5.tgz"
   integrity sha512-iniQP4rj1FhBdBYS/+eQv7j1tadJ9lJtdzgOpvsOHng/GbcDh2Fhdeq+ZRldrPYdXvCyfFUmFeEwEGXZB5I/AQ==
 
+moment@^2.29.1:
+  version "2.29.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
+  integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
 moti@^0.17.1:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/moti/-/moti-0.17.1.tgz#6c0c3c5fa76cb2cd1af86787ef5596debb87c6da"
@@ -5342,6 +5347,11 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-country-flag@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-country-flag/-/react-native-country-flag-1.1.6.tgz#ca2aae3752f6e8621fab461e50a60aa7a9a4528f"
+  integrity sha512-0PJ8W6o0+fQzDAnT5obzdPh+PsaYWRwRrIvOFwgqhU7Y/nu+Tkp26CSA69CktBJUB+8/JrAQAKqjDqXT/fJ2oQ==
 
 react-native-gesture-handler@~2.1.0:
   version "2.1.1"
