@@ -10,8 +10,8 @@ import { Feather } from '@expo/vector-icons';
 import moment from 'moment';
 import { FAB } from 'react-native-paper';
 import { AnimatePresence, MotiView } from 'moti';
-import scrapeData from '../scraper/exchangeRate';
-import { getISOByParam } from '../scraper/ISOCountry';
+import scrapeData from '../scraper/scrape';
+import getISOByParam from '../scraper/ISOCountry';
 import currencyName from '../scraper/currencyName.json';
 
 function RateItem({ item }) {
@@ -99,19 +99,9 @@ function ExchangeRate() {
         <View style={{
           marginTop: 24,
           marginBottom: 12,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          alignItems: 'flex-end',
         }}
         >
-          <Text style={{
-            textAlign: 'center',
-            fontWeight: 'bold',
-            fontSize: 18,
-          }}
-          >
-            1 USD =
-          </Text>
           <Text>
             Last updated:
             {' '}
@@ -147,6 +137,15 @@ function ExchangeRate() {
             placeholder="Search for currency"
           />
         </View>
+        <Text style={{
+          textAlign: 'center',
+          fontWeight: 'bold',
+          fontSize: 18,
+          marginBottom: 24,
+        }}
+        >
+          1 USD =
+        </Text>
         <FlatList
           ref={listRef}
           onScroll={listOnScroll}

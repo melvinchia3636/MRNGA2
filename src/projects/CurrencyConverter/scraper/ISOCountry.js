@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable consistent-return */
 /* eslint-disable func-names */
@@ -1029,10 +1030,10 @@ const dataJSON = {
   },
 };
 
-exports.getISOByParam = function (param, value) {
+export default function getISOByParam(param, value) {
   for (const key in dataJSON) {
     if (dataJSON.hasOwnProperty(key) && dataJSON[key][param] === value) {
       return key;
     }
   }
-};
+}
